@@ -1,0 +1,36 @@
+USE [TaskManager]
+GO
+
+/****** Object:  Table [dbo].[Task]    Script Date: 22-05-2019 16:06:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Task](
+	[Task_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Parent _ID] [int] NULL,
+	[Task] [nchar](500) NOT NULL,
+	[Start_Date] [datetime2](7) NULL,
+	[End_Date] [datetime2](7) NULL,
+	[Priority] [int] NULL,
+ CONSTRAINT [PK_Task] PRIMARY KEY CLUSTERED 
+(
+	[Task_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Task]  WITH CHECK ADD  CONSTRAINT [FK_Task_Task] FOREIGN KEY([Task_ID])
+REFERENCES [dbo].[Task] ([Task_ID])
+GO
+
+ALTER TABLE [dbo].[Task] CHECK CONSTRAINT [FK_Task_Task]
+GO
+
+INSERT INTO Task
+VALUES(NULL,'Task 1',GETUTCDATE(),NULL,1),
+(NULL,'Task 2',GETUTCDATE(),NULL,1),
+(NULL,'Task 3',GETUTCDATE(),NULL,1)
