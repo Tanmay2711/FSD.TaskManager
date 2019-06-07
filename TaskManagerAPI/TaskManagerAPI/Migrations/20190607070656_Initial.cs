@@ -6,6 +6,8 @@ namespace TaskManagerAPI.Migrations
 {
     public partial class Initial : Migration
     {
+        //Command : Add-Migration Initial 
+        //Update-Database
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
