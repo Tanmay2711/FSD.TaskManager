@@ -9,6 +9,7 @@ using TaskManagerAPI.Models;
 
 namespace TaskManagerAPI.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class TasksController : ControllerBase
