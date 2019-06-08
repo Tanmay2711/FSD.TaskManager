@@ -1,0 +1,27 @@
+<table *ngFor="let taskInfo of taskData">
+  <thead>
+      <tr>
+          <th>Task</th>
+          <th class="whiteThickLeftBorder">Parent</th>
+          <th class="whiteThickLeftBorder">Priority</th>
+          <th class="whiteThickLeftBorder">Start</th>
+          <th class="whiteThickLeftBorder">End</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr> 
+          <td class="highlightedGray">{{ taskInfo.name}}</td>
+          <td class="highlightedGray whiteThickLeftBorder">{{ taskInfo.parentID }}</td>
+          <td>{{ taskInfo.priority }}</td>
+          <td>{{ taskInfo.startDate | date:'shortDate' }}</td>
+          <td>{{ taskInfo.endDate | date:'shortDate' }}</td>
+          <td>
+              <button (click)="editRecord(this)">Edit</button>
+              
+          </td>
+          <td>
+              <button (click)="deleteRecord(this)">End Task</button>
+          </td>
+      </tr>
+  </tbody>
+  </table>

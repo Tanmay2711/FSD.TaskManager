@@ -5,18 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewTaskComponent } from './view-task/view-task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TaskService } from './task.service';
+import { GridTaskViewComponent } from './grid-task-view/grid-task-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewTaskComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    GridTaskViewComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
