@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-add-task',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent implements OnInit {
-  taskInfo: any
+  @Input() taskInfo: any
   constructor() { 
     this.taskInfo = {};
   }
