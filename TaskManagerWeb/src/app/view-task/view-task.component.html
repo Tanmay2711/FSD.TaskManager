@@ -1,0 +1,14 @@
+<div>
+  <label class="viewTaskLables">Task : </label><input class="viewTaskTextInput bigTextInput" type="text" style="margin-left: 10px" /> 
+  <label class="viewTaskLables" style="margin-left:20px">Parent Task : </label><input style="margin-left: 10px" class="viewTaskTextInput bigTextInput" type="text"/>
+  <br>
+  <br>
+  <label class="viewTaskLables">Priority From: </label><input class="viewTaskTextInput smallTextInput" type="text" style="margin-left: 3px" /> 
+  <label class="viewTaskLables">Priority To: </label><input class="viewTaskTextInput smallTextInput" type="text" style="margin-left: 3px" /> 
+  <label class="viewTaskLables" style="margin-left: 7%">Start Date: </label><input class="viewTaskTextInput smallTextInput" type="text" style="margin-left: 3px" /> 
+  <label class="viewTaskLables">End Date: </label><input class="viewTaskTextInput smallTextInput" type="text" style="margin-left: 3px" /> 
+
+  <br>
+  <hr style="border-top: dotted 2px;" />
+  <app-grid-task-view [taskData]="taskData"></app-grid-task-view>
+</div>
