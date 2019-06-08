@@ -1,3 +1,34 @@
-<p>
-  add-task works!
-</p>
+<div class="halfOfScreen">
+    <h2></h2>
+    <form>
+        <div class="form-group">
+            <label for="taskname-input">Task:</label>
+            <input type="text" id="taskname-input" [(ngModel)]="taskInfo.name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="myRange">Priority:</label>
+            <div>
+              <span style="float: left">0</span>
+              <span style="float: right">30</span>
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="30" value="0" [(ngModel)]="taskInfo.priority" class="slider" id="myRange">
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="parenttask-input">Parent Task:</label>
+            <input type="text" id="parenttask-input" [(ngModel)]="taskInfo.parentName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="startdate-input">Start Date:</label>
+            <input type="date" id="startdate-input" [(ngModel)]="taskInfo.startDate" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="enddate-input">End Date:</label>
+            <input type="date" id="enddate-input" [(ngModel)]="taskInfo.endDate" class="form-control" />
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="addOrUpdateTaskRecord($event);">Add Task</button>
+        <button style="margin-left: 5%" type="reset" class="btn btn-secondary">Reset</button>
+
+    </form>
+   </div>
