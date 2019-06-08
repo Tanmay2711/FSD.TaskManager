@@ -3,6 +3,11 @@ label.viewTaskLables
     font-size: small;
     font-weight: bold;
 }
+
+input[type="text"]
+{
+    height: 25px
+}
 input.viewTaskTextInput
 {
     background-color: lightgray
