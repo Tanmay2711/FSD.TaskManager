@@ -7,15 +7,13 @@ import { TaskService } from '../task.service';
   styleUrls: ['./view-task.component.css']
 })
 export class ViewTaskComponent implements OnInit {
-
+  taskService : TaskService
   taskData : Array<any>
-  constructor(private taskService: TaskService) 
-  { 
-    taskService.get().subscribe((data: any) => this.taskData = data);
+  constructor(private taskSer: TaskService) { 
+    this.taskService = taskSer;
   }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
+    this.taskService.get().subscribe((data: any) => this.taskData = data);
   }
-
 }
