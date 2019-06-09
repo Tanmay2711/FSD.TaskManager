@@ -2,11 +2,11 @@
     <h2></h2>
     <form>
         <div class="form-group">
-            <label for="taskname-input">Task:</label>
-            <input type="text" id="taskname-input" [(ngModel)]="taskInfo.name" class="form-control" />
+            <label for="taskname-input" class="addTaskLables">Task:</label>
+            <input type="text" id="taskname-input" [(ngModel)]="taskInfo.name" class="form-control addTaskTextInput" />
         </div>
         <div class="form-group">
-            <label for="myRange">Priority:</label>
+            <label for="myRange" class="addTaskLables">Priority:</label>
             <div>
               <span style="float: left">0</span>
               <span style="float: right">30</span>
@@ -16,16 +16,16 @@
               </div>
         </div>
         <div class="form-group">
-            <label for="parenttask-input">Parent Task:</label>
-            <input type="text" id="parenttask-input" [(ngModel)]="taskInfo.parentName" class="form-control" />
+            <label for="parenttask-input" class="addTaskLables">Parent Task:</label>
+            <input type="text" id="parenttask-input" [(ngModel)]="taskInfo.parentName" class="form-control addTaskTextInput" />
         </div>
         <div class="form-group">
-            <label for="startdate-input">Start Date:</label>
-            <input type="date" id="startdate-input" [(ngModel)]="taskInfo.startDate" class="form-control" />
+            <label for="startdate-input" class="addTaskLables">Start Date:</label>
+            <input type="date" id="startdate-input" [(ngModel)]="taskInfo.startDate" class="form-control addTaskTextInput" />
         </div>
         <div class="form-group">
-            <label for="enddate-input">End Date:</label>
-            <input type="date" id="enddate-input" [(ngModel)]="taskInfo.endDate" class="form-control" />
+            <label for="enddate-input" class="addTaskLables">End Date:</label>
+            <input type="date" id="enddate-input" [(ngModel)]="taskInfo.endDate" class="form-control addTaskTextInput" />
         </div>
         <button type="button" class="btn btn-secondary" (click)="addOrUpdateTaskRecord($event);">Add Task</button>
         <button style="margin-left: 5%" type="reset" class="btn btn-secondary">Reset</button>

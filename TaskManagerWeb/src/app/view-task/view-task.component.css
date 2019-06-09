@@ -10,7 +10,8 @@ input[type="text"]
 }
 input.viewTaskTextInput
 {
-    background-color: lightgray
+    background-color: lightgray;
+    display: inline;
 }
 input.bigTextInput
 {
