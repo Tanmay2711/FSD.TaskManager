@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-grid-task-view',
@@ -11,6 +12,12 @@ export class GridTaskViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    _.forEach(this.taskData, function(obj) {
+      var parentTaskName = (_.find(this.taskData, el => el.tasksID === obj.parentID) || {}).name;
+      _.assignIn(obj,{parentTaskName:parentTaskName});
+    });
+
+    console.log(this.taskData);
   }
 
 }

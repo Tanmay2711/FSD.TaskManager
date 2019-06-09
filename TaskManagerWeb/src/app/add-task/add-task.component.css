@@ -32,3 +32,14 @@
   {
       width: 50%
   }
+
+label.addTaskLables
+{
+    font-size: small;
+    font-weight: bold;
+}
+
+input.addTaskTextInput
+{
+    background-color: lightgray
+}
