@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TaskService } from '../task.service';
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -10,9 +11,12 @@ import * as _ from 'lodash';
 export class AddTaskComponent implements OnInit {
   taskService : TaskService
   taskData:Array<any>
+  router: Router
   @Input() taskInfo: any
-  constructor(private taskSer : TaskService) { 
+  constructor(private taskSer : TaskService,
+    private ro: Router) { 
     this.taskService = taskSer;
+    this.router = ro;
     this.taskInfo = {
       tasksID: 0,
       name:undefined,
@@ -39,36 +43,37 @@ export class AddTaskComponent implements OnInit {
     };
   };
 
+  navigateToViewTask(){
+    this.router.navigate(['/viewtask']);
+  }
+
   public addOrUpdateTaskRecord = function(event) {
 
     let taskWithId,parentTask;
     parentTask = _.find(this.taskData, (el => el.name === this.taskInfo.parentName));
-    //console.log(this.taskInfo);
+    taskWithId = _.find(this.taskData, (el => el.id === this.taskInfo.tasksID));
     let taskPayLoad = {   
-        tasksID: 0,
+        tasksID: (taskWithId || {}).tasksID,
         parentID: (parentTask || {}).tasksID,
         name: this.taskInfo.name,
         startDate: this.taskInfo.startDate,
         endDate: this.taskInfo.endDate,
         priority: this.taskInfo.priority
     };
-
-    // console.log(taskPayLoad);
-    // console.log(event);
-
     if (taskWithId) {
-      //const updateIndex = _.findIndex(this.joggingData, {id: taskWithId.id});
-      // this.taskService.update(this.taskInfo).subscribe(
-      //   //joggingRecord =>  this.joggingData.splice(updateIndex, 1, jogging)
-      // );
+      this.taskService.update(taskPayLoad).subscribe(
+        () => this.navigateToViewTask()
+      );
     } else {
       this.taskService.add(taskPayLoad).subscribe(
-        //joggingRecord => this.joggingData.push(jogging)
-        (data:any) => this.taskData.push(data)
+        (data:any) => {
+          this.taskData.push(data);
+          this.clearTaskInfo();
+          this.navigateToViewTask();
+        }
+
       );
     }
-
-    this.clearTaskInfo();
   };
 
 }
