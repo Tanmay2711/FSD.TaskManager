@@ -17,7 +17,16 @@
         </div>
         <div class="form-group">
             <label for="parenttask-input" class="addTaskLables">Parent Task:</label>
-            <input type="text" id="parenttask-input" [(ngModel)]="taskInfo.parentName" name="parentName" class="form-control addTaskTextInput" />
+            <mat-form-field class="example-full-width">
+                <input type="text" id="parenttask-input" name="parentName" class="form-control addTaskTextInput" 
+                matInput [formControl]="myControl" [matAutocomplete]="auto" aria-label="Number" [(ngModel)]="taskInfo.parentName"/>
+            
+                <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                        </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
         </div>
         <div class="form-group">
             <label for="startdate-input" class="addTaskLables">Start Date:</label>
@@ -32,3 +41,5 @@
 
     </form>
    </div>
+
+   <!-- [(ngModel)]="taskInfo.parentName" -->
