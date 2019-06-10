@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import { TaskService } from '../task.service';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
@@ -13,6 +16,9 @@ export class AddTaskComponent implements OnInit {
   taskData:Array<any>
   router: Router
   @Input() taskInfo: any
+  myControl = new FormControl();
+  options: string[];
+  filteredOptions: Observable<string[]>;
   constructor(private taskSer : TaskService,
     private ro: Router) { 
     this.taskService = taskSer;
@@ -28,7 +34,23 @@ export class AddTaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.taskService.get().subscribe((data: any) => this.taskData = data);
+    this.taskService.get().subscribe((data: any) => 
+    {
+      this.taskData = data;
+      this.options = this.taskData.map(obj => obj.name);
+      
+      this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   clearTaskInfo = function() {
