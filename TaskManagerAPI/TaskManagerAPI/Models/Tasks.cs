@@ -15,4 +15,12 @@ namespace TaskManagerAPI.Models
 
         public int Priority { get; set; }
     }
+
+ //   {
+	//'ParentID':0,
+	//'Name':'Task 1',
+	//'StartDate':'06-30-2019',
+	//'EndDate':'07-30-2019',
+	//'Priority':10
+ //   }
 }

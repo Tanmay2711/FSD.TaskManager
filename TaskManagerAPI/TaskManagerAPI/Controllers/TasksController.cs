@@ -76,6 +76,7 @@ namespace TaskManagerAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Tasks>> PostTasks(Tasks tasks)
         {
+            await Task.Delay(TimeSpan.FromSeconds(5));
             _context.Tasks.Add(tasks);
             await _context.SaveChangesAsync();
 

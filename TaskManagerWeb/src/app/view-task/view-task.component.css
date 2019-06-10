@@ -1,0 +1,26 @@
+label.viewTaskLables
+{
+    font-size: small;
+    font-weight: bold;
+}
+
+input[type="text"]
+{
+    height: 25px
+}
+input.viewTaskTextInput
+{
+    background-color: lightgray;
+    display: inline;
+}
+input.bigTextInput
+{
+    margin-left: 10px;
+    width: 29%;
+}
+
+input.smallTextInput
+{
+    margin-left: 3px;
+    width: 10%;
+}

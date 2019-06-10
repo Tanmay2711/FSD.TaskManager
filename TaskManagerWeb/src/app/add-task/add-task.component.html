@@ -1,0 +1,34 @@
+<div class="halfOfScreen">
+    <h2></h2>
+    <form>
+        <div class="form-group">
+            <label for="taskname-input" class="addTaskLables">Task:</label>
+            <input type="text" id="taskname-input" [(ngModel)]="taskInfo.name" class="form-control addTaskTextInput" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="myRange" class="addTaskLables">Priority:</label>
+            <div>
+              <span style="float: left">0</span>
+              <span style="float: right">30</span>
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="30" value="0" [(ngModel)]="taskInfo.priority" name="priority" class="slider" id="myRange">
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="parenttask-input" class="addTaskLables">Parent Task:</label>
+            <input type="text" id="parenttask-input" [(ngModel)]="taskInfo.parentName" name="parentName" class="form-control addTaskTextInput" />
+        </div>
+        <div class="form-group">
+            <label for="startdate-input" class="addTaskLables">Start Date:</label>
+            <input type="date" id="startdate-input" [(ngModel)]="taskInfo.startDate" name="startDate" class="form-control addTaskTextInput" />
+        </div>
+        <div class="form-group">
+            <label for="enddate-input" class="addTaskLables">End Date:</label>
+            <input type="date" id="enddate-input" [(ngModel)]="taskInfo.endDate" name="endDate" class="form-control addTaskTextInput" />
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="addOrUpdateTaskRecord($event);">Add Task</button>
+        <button style="margin-left: 5%" type="reset" class="btn btn-secondary">Reset</button>
+
+    </form>
+   </div>
