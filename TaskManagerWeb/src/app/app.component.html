@@ -22,10 +22,10 @@
   <br>
   <!-- <a href="#">Add Task</a>
   <a href="#" style="margin-left: 30px">View Task</a> -->
-  <a routerLink="/addtask" routerLinkActive="active">Add Task</a>
+  <a routerLink="/addtask" routerLinkActive="active" >{{addTaskLinkText}}</a>
   <a routerLink="/viewtask" routerLinkActive="active" style="margin-left: 30px">View Task</a>
   <div style="margin-top: 20px">
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
   </div>
 </div>
 
