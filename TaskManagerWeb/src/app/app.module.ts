@@ -26,7 +26,6 @@ import { GridTaskViewComponent } from './grid-task-view/grid-task-view.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -35,7 +34,8 @@ import { GridTaskViewComponent } from './grid-task-view/grid-task-view.component
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AppRoutingModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

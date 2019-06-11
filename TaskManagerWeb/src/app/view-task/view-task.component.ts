@@ -35,4 +35,9 @@ export class ViewTaskComponent implements OnInit {
       this.taskData.splice(this.taskData.indexOf(task),1);
     });
   }
+
+  editClicked(record) {
+    //this.currentJogging = record;
+  };
+
 }
