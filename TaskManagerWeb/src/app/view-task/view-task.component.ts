@@ -31,10 +31,8 @@ export class ViewTaskComponent implements OnInit {
   }
 
   deleteClicked(task:any){
-    console.log("record to be deleted");
-    console.log(task);
     this.taskService.remove(task).subscribe(() => {
-      //this.taskData = this.modifyTaskData(data);
+      this.taskData.splice(this.taskData.indexOf(task),1);
     });
   }
 }
