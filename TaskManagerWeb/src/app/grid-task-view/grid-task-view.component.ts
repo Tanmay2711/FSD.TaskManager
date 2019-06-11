@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 
 @Component({
@@ -7,7 +7,9 @@ import * as _ from 'lodash';
   styleUrls: ['./grid-task-view.component.css']
 })
 export class GridTaskViewComponent implements OnInit {
-
+  @Output() recordDeleted = new EventEmitter<any>();
+  @Output() newClicked = new EventEmitter<any>();
+  @Output() editClicked = new EventEmitter<any>();
   @Input() taskData :Array<any>
   constructor() { }
 
@@ -18,6 +20,17 @@ export class GridTaskViewComponent implements OnInit {
     });
 
     console.log(this.taskData);
+  }
+
+  public deleteRecord(task:any) {
+    console.log(task);
+    this.recordDeleted.emit(task);
+  }
+    
+  public editRecord(record) {
+    const clonedRecord = Object.assign({}, record);
+    this.editClicked.emit(clonedRecord);
+
   }
 
 }
