@@ -6,6 +6,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 const routes: Routes = [
   { path: 'viewtask', component: ViewTaskComponent },
   { path: 'addtask', component: AddTaskComponent },
+  { path: 'edittask/:taskId', component: AddTaskComponent },
   { path: '',   redirectTo: '/viewtask', pathMatch: 'full' },
 ];
 

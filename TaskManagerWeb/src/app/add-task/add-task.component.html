@@ -17,7 +17,6 @@
         </div>
         <div class="form-group">
             <label for="parenttask-input" class="addTaskLables">Parent Task:</label>
-            <mat-form-field class="example-full-width">
                 <input type="text" id="parenttask-input" name="parentName" class="form-control addTaskTextInput" 
                 matInput [formControl]="myControl" [matAutocomplete]="auto" aria-label="Number" [(ngModel)]="taskInfo.parentName"/>
             
@@ -26,18 +25,21 @@
                         {{option}}
                         </mat-option>
                 </mat-autocomplete>
-            </mat-form-field>
         </div>
         <div class="form-group">
             <label for="startdate-input" class="addTaskLables">Start Date:</label>
-            <input type="date" id="startdate-input" [(ngModel)]="taskInfo.startDate" name="startDate" class="form-control addTaskTextInput" />
+            <input type="text" matInput [matDatepicker]="myDatepicker" id="startdate-input" [(ngModel)]="taskInfo.startDate" name="startDate" class="form-control addTaskTextInput" />
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker></mat-datepicker>
         </div>
         <div class="form-group">
             <label for="enddate-input" class="addTaskLables">End Date:</label>
-            <input type="date" id="enddate-input" [(ngModel)]="taskInfo.endDate" name="endDate" class="form-control addTaskTextInput" />
+            <input type="text" matInput [matDatepicker]="myDatepicker1" id="enddate-input" [(ngModel)]="taskInfo.endDate" name="endDate" class="form-control addTaskTextInput" />
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker1></mat-datepicker>
         </div>
-        <button type="button" class="btn btn-secondary" (click)="addOrUpdateTaskRecord($event);">Add Task</button>
-        <button style="margin-left: 5%" type="reset" class="btn btn-secondary">Reset</button>
+        <button type="button" class="btn btn-secondary" (click)="addOrUpdateTaskRecord($event);">{{AddTaskText}}</button>
+        <button style="margin-left: 5%" type="button" class="btn btn-secondary" (click)="resetClicked($event)">Cancel</button>
 
     </form>
    </div>

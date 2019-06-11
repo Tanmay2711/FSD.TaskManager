@@ -2,7 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatAutocompleteModule,MatFormFieldModule,MatInputModule} from '@angular/material';
+import {MatAutocompleteModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,14 +26,16 @@ import { GridTaskViewComponent } from './grid-task-view/grid-task-view.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AppRoutingModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

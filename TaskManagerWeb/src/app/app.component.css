@@ -1,6 +1,7 @@
 a
 {
-    color: black
+    color: black;
+    font-weight: 700;
 }
 a.active
 {

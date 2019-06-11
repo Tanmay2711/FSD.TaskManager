@@ -17,11 +17,11 @@
           <td>{{ taskInfo.startDate | date:'shortDate' }}</td>
           <td>{{ taskInfo.endDate | date:'shortDate' }}</td>
           <td>
-              <button (click)="editRecord(this)">Edit</button>
-              
+              <!-- <button (click)="editRecord(taskInfo)">Edit</button> -->
+              <a class="btn btn-secondary btn-sm" [routerLink]="['/edittask', taskInfo.tasksID]">Edit Task</a>              
           </td>
           <td>
-              <button (click)="deleteRecord(this)">End Task</button>
+              <button class="btn btn-secondary btn-sm" (click)="deleteRecord(taskInfo)">End Task</button>
           </td>
       </tr>
   </tbody>
