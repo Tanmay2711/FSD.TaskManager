@@ -10,5 +10,5 @@
 
   <br>
   <hr style="border-top: dotted 2px;" />
-  <app-grid-task-view [taskData]="taskData"></app-grid-task-view>
+  <app-grid-task-view [taskData]="taskData" (editClicked)="editClicked($event)" (recordDeleted)="deleteClicked($event)"></app-grid-task-view>
 </div>

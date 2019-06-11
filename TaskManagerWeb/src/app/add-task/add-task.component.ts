@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {map, startWith,switchMap } from 'rxjs/operators';
 import { TaskService } from '../task.service';
 import * as _ from 'lodash';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -13,13 +13,17 @@ import { Router } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   taskService : TaskService
+  isEditView:boolean= false
   taskData:Array<any>
   router: Router
-  @Input() taskInfo: any
+  AddTaskText:string="Add Task"
+  @Input() taskInfo : any
+  previousTaskInfo : any
   myControl = new FormControl();
   options: string[];
   filteredOptions: Observable<string[]>;
   constructor(private taskSer : TaskService,
+    private route: ActivatedRoute,
     private ro: Router) { 
     this.taskService = taskSer;
     this.router = ro;
@@ -37,13 +41,25 @@ export class AddTaskComponent implements OnInit {
     this.taskService.get().subscribe((data: any) => 
     {
       this.taskData = data;
-      this.options = this.taskData.map(obj => obj.name);
-      
+      let id = this.route.snapshot.paramMap.get('taskId');
+      if(id){
+        this.taskService.getById(+id).subscribe((data:any) => {
+            this.taskInfo = data;
+            _.assignIn(this.taskInfo,{parentName:this.getParentTaskName(this.taskData,data.parentID) || ''});
+            this.previousTaskInfo = Object.assign({},this.taskInfo);
+            this.isEditView = true;
+        });
+
+        this.AddTaskText = "Edit Task";
+      }
+
+      this.options = this.taskData.filter(obj => obj.tasksID !== +id).map(obj => obj.name);      
       this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
       );
+
     });
   }
 
@@ -69,11 +85,16 @@ export class AddTaskComponent implements OnInit {
     this.router.navigate(['/viewtask']);
   }
 
+  getParentTaskName(taskList,parentID){
+    var parentTaskName = (_.find(taskList, el => el.tasksID === parentID) || {}).name;
+    return parentTaskName;
+  }
+
   public addOrUpdateTaskRecord = function(event) {
 
     let taskWithId,parentTask;
     parentTask = _.find(this.taskData, (el => el.name === this.taskInfo.parentName));
-    taskWithId = _.find(this.taskData, (el => el.id === this.taskInfo.tasksID));
+    taskWithId = _.find(this.taskData, (el => el.tasksID === this.taskInfo.tasksID));
     let taskPayLoad = {   
         tasksID: (taskWithId || {}).tasksID,
         parentID: (parentTask || {}).tasksID,
@@ -96,6 +117,16 @@ export class AddTaskComponent implements OnInit {
 
       );
     }
-  };
+  }
+
+  resetClicked($event){
+    if(this.isEditView){
+      //this.navigateToViewTask();
+      this.taskInfo = Object.assign({},this.previousTaskInfo);
+      return;
+    }
+
+    this.clearTaskInfo();
+  }
 
 }

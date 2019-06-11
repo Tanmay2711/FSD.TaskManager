@@ -18,6 +18,11 @@ export class TaskService {
     return this.http.get(this.accessPointUrl, {headers: this.headers});
   }
 
+  public getById(tasksID:any) {
+    // Get all tasks data
+    return this.http.get(this.accessPointUrl +'/'+ tasksID, {headers: this.headers});
+  }
+
   public add(payload: any) {
     return this.http.post(this.accessPointUrl, payload, {headers: this.headers});
   }

@@ -29,4 +29,15 @@ export class ViewTaskComponent implements OnInit {
       this.taskData = this.modifyTaskData(data);
     });
   }
+
+  deleteClicked(task:any){
+    this.taskService.remove(task).subscribe(() => {
+      this.taskData.splice(this.taskData.indexOf(task),1);
+    });
+  }
+
+  editClicked(record) {
+    //this.currentJogging = record;
+  };
+
 }
