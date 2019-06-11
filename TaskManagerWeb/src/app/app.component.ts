@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {  AfterViewInit, ViewChild,Component } from '@angular/core';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Task Manager';
+  addTaskLinkText : string = "Add Task";
+  onActivate(componentRef){
+    this.addTaskLinkText = componentRef.isEditView ? "Edit Task" : "Add Task";
+  }
 }

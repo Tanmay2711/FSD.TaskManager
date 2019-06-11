@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith,switchMap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { Router,ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   taskService : TaskService
-  isEditView:boolean= false
+  public isEditView:boolean= false
   taskData:Array<any>
   router: Router
   AddTaskText:string="Add Task"
@@ -35,6 +35,13 @@ export class AddTaskComponent implements OnInit {
       endDate:undefined,
       priority:0
     };
+
+    let id = this.route.snapshot.paramMap.get('taskId');
+    if(id){
+      this.isEditView = true;
+    }else{
+      this.isEditView = false;
+    }
   }
 
   ngOnInit() {
@@ -49,7 +56,7 @@ export class AddTaskComponent implements OnInit {
             this.previousTaskInfo = Object.assign({},this.taskInfo);
             this.isEditView = true;
         });
-
+        this.isEditView = true;
         this.AddTaskText = "Edit Task";
       }
 
