@@ -66,7 +66,6 @@ export class AddTaskComponent implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       );
-
     });
   }
 
