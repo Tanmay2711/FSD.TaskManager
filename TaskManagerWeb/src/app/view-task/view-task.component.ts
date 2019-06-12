@@ -55,8 +55,8 @@ export class ViewTaskComponent implements OnInit {
 
   _filterByTask(filterValue) {
     return this.tempTaskData.filter(
-    task => task.name.toLowerCase().includes(this.searchModel.taskName) 
-    && task.parentTaskName.toLowerCase().includes(this.searchModel.parentTaskName)
+    task => task.name.toLowerCase().includes(this.searchModel.taskName.toLowerCase()) 
+    && task.parentTaskName.toLowerCase().includes(this.searchModel.parentTaskName.toLowerCase())
     && 
     (
       task.priority >= +(this.searchModel.priorityFrom || 0) && task.priority <= +(this.searchModel.priorityTo || 30)
