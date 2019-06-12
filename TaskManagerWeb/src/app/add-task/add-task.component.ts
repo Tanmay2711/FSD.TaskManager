@@ -17,6 +17,7 @@ export class AddTaskComponent implements OnInit {
   taskData:Array<any>
   router: Router
   AddTaskText:string="Add Task"
+  CancelTaskText:string="Reset"
   @Input() taskInfo : any
   previousTaskInfo : any
   myControl = new FormControl();
@@ -57,7 +58,8 @@ export class AddTaskComponent implements OnInit {
             this.isEditView = true;
         });
         this.isEditView = true;
-        this.AddTaskText = "Edit Task";
+        this.AddTaskText = "Update";
+        this.CancelTaskText = "Cancel";
       }
 
       this.options = this.taskData.filter(obj => obj.tasksID !== +id).map(obj => obj.name);      

@@ -39,9 +39,7 @@
             <mat-datepicker #myDatepicker1></mat-datepicker>
         </div>
         <button type="button" class="btn btn-secondary" (click)="addOrUpdateTaskRecord($event);">{{AddTaskText}}</button>
-        <button style="margin-left: 5%" type="button" class="btn btn-secondary" (click)="resetClicked($event)">Cancel</button>
+        <button style="margin-left: 5%" type="button" class="btn btn-secondary" (click)="resetClicked($event)">{{CancelTaskText}}</button>
 
     </form>
    </div>
-
-   <!-- [(ngModel)]="taskInfo.parentName" -->
