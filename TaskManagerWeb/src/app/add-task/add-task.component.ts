@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith,switchMap } from 'rxjs/operators';
+import {map, startWith } from 'rxjs/operators';
 import { TaskService } from '../task.service';
 import * as _ from 'lodash';
-import { Router,ActivatedRoute, ParamMap } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -23,9 +23,9 @@ export class AddTaskComponent implements OnInit {
   myControl = new FormControl();
   options: string[];
   filteredOptions: Observable<string[]>;
-  constructor(private taskSer : TaskService,
+  constructor(taskSer : TaskService,
     private route: ActivatedRoute,
-    private ro: Router) { 
+    ro: Router) { 
     this.taskService = taskSer;
     this.router = ro;
     this.taskInfo = {
@@ -98,7 +98,7 @@ export class AddTaskComponent implements OnInit {
     return parentTaskName;
   }
 
-  public addOrUpdateTaskRecord = function(event) {
+  public addOrUpdateTaskRecord = function() {
 
     let taskWithId,parentTask;
     parentTask = _.find(this.taskData, (el => el.name === this.taskInfo.parentName));
@@ -127,7 +127,7 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
-  resetClicked($event){
+  resetClicked(){
     if(this.isEditView){
       //this.navigateToViewTask();
       this.taskInfo = Object.assign({},this.previousTaskInfo);
