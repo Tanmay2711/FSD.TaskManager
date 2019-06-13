@@ -10,7 +10,7 @@
       </tr>
   </thead>
   <tbody>
-      <tr> 
+      <tr>
           <td class="highlightedGray">{{ taskInfo.name}}</td>
           <td class="highlightedGray whiteThickLeftBorder">{{ taskInfo.parentTaskName }}</td>
           <td>{{ taskInfo.priority }}</td>
@@ -18,10 +18,10 @@
           <td>{{ taskInfo.endDate | date:'shortDate' }}</td>
           <td>
               <!-- <button (click)="editRecord(taskInfo)">Edit</button> -->
-              <a class="btn btn-secondary btn-sm" [routerLink]="['/edittask', taskInfo.tasksID]">Edit Task</a>              
+              <a class="btn btn-secondary btn-sm cutombutton" [routerLink]="['/edittask', taskInfo.tasksID]">Edit</a>
           </td>
           <td>
-              <button class="btn btn-secondary btn-sm" (click)="deleteRecord(taskInfo)">End Task</button>
+              <button class="btn btn-secondary btn-sm cutombutton" (click)="deleteRecord(taskInfo)">End Task</button>
           </td>
       </tr>
   </tbody>

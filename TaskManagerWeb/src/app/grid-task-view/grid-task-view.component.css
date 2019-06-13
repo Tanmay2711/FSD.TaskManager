@@ -24,3 +24,8 @@ th
 {
    border-left:  20px solid white
 }
+
+.cutombutton {
+    min-width: 75px;
+    max-width: 75px;
+}
