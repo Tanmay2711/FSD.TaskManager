@@ -139,6 +139,7 @@ export class AddTaskComponent implements OnInit {
     }
 
     this.clearTaskInfo();
+    this.ToolTipText = this.taskInfo.priority.toString();
   }
 
   onRangeInput($event){
