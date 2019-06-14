@@ -19,6 +19,10 @@
     background: black;
     cursor: pointer;
   }
+
+  /* .slider::-webkit-slider-thumb:hover {
+    background: aqua;
+  } */
   
   .slider::-moz-range-thumb {
     width: 25px;

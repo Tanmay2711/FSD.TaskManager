@@ -18,6 +18,7 @@ export class AddTaskComponent implements OnInit {
   router: Router
   AddTaskText:string="Add Task"
   CancelTaskText:string="Reset"
+  ToolTipText: string = "0";
   @Input() taskInfo : any
   previousTaskInfo : any
   myControl = new FormControl();
@@ -56,6 +57,7 @@ export class AddTaskComponent implements OnInit {
             _.assignIn(this.taskInfo,{parentName:this.getParentTaskName(this.taskData,data.parentID) || ''});
             this.previousTaskInfo = Object.assign({},this.taskInfo);
             this.isEditView = true;
+            this.ToolTipText = this.taskInfo.priority.toString();
         });
         this.isEditView = true;
         this.AddTaskText = "Update";
@@ -69,6 +71,8 @@ export class AddTaskComponent implements OnInit {
         map(value => this._filter(value))
       );
     });
+
+
   }
 
   private _filter(value: string): string[] {
@@ -129,12 +133,17 @@ export class AddTaskComponent implements OnInit {
 
   resetClicked(){
     if(this.isEditView){
-      //this.navigateToViewTask();
       this.taskInfo = Object.assign({},this.previousTaskInfo);
+      this.ToolTipText = this.taskInfo.priority.toString();
       return;
     }
 
     this.clearTaskInfo();
+    this.ToolTipText = this.taskInfo.priority.toString();
+  }
+
+  onRangeInput($event){
+    this.ToolTipText = this.taskInfo.priority.toString();
   }
 
 }

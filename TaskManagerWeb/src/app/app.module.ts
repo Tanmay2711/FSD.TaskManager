@@ -7,6 +7,7 @@ import {MatAutocompleteModule,
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,7 @@ import { GridTaskViewComponent } from './grid-task-view/grid-task-view.component
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTooltipModule,
     AppRoutingModule
   ],
   providers: [TaskService],
