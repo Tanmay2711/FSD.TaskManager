@@ -12,7 +12,7 @@
               <span style="float: right">30</span>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="0" max="30" value="0" [(ngModel)]="taskInfo.priority" name="priority" class="slider" id="myRange">
+                <input type="range" min="0" max="30" value="0" matTooltip={{ToolTipText}} matTooltipPosition="after"  [(ngModel)]="taskInfo.priority" (input)="onRangeInput($event)" name="priority" class="slider" id="myRange">
               </div>
         </div>
         <div class="form-group">
