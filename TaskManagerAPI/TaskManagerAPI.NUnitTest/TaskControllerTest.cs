@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TaskManagerAPI.Controllers;
@@ -61,10 +63,13 @@ namespace Tests
         }
 
         [Test]
-        public async Task Test1Async()
+        public async Task TestTasksGetTasksApi()
         {
             var lst = await context.Tasks.ToListAsync();
-            Assert.Pass();
+            var res = await this.controller.GetTasks();
+            Assert.IsInstanceOf<ActionResult<IEnumerable<Tasks>>>(res,"Return type must be ActionResult");
+            Assert.IsNotNull(res.Value, "Action result value must not be null");
+            Assert.AreEqual(lst.Count, res.Value.Count(), "Tasks count should match with the count from Tasks table");
         }
     }
 }
