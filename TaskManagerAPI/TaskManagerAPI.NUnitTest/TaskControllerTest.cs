@@ -39,6 +39,15 @@ namespace Tests
                     Priority = 2,
                     StartDate = DateTime.Now
                 });
+                yield return new TestCaseData(6, new Tasks
+                {
+                    Name = "Task 1",
+                    TasksID = 6,
+                    ParentID = 0,
+                    EndDate = DateTime.Now.AddDays(6),
+                    Priority = 2,
+                    StartDate = DateTime.Now
+                });
             }
         }
 
@@ -58,11 +67,11 @@ namespace Tests
             }
         }
 
-        [OneTimeSetUp]
+        [SetUp]
         public async Task SetupAsync()
         {
             var options = new DbContextOptionsBuilder<TaskManagerContext>()
-                       .UseInMemoryDatabase(databaseName: "InMemoryTaskManagerDatabase").UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                       .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                        .Options;
 
             this.context = new TaskManagerContext(options);
@@ -109,7 +118,7 @@ namespace Tests
             this.controller = new TasksController(this.context);
         }
 
-        [Test]
+        [Test,Order(1)]
         public async Task TestTasksGetTasksApi()
         {
             var lst = await context.Tasks.ToListAsync();
@@ -123,6 +132,7 @@ namespace Tests
         [TestCase(2)]
         [TestCase(3)]
         [TestCase(4)]
+        [Order(2)]
         public async Task TestTasksGetTasksByIdApi(int taskId)
         {
             var lst = (await context.Tasks.ToListAsync()).Find(t => t.TasksID.Equals(taskId));
@@ -138,6 +148,7 @@ namespace Tests
         }
 
         [TestCaseSource("TestCaseSourceForPutTask")]
+        [Order(3)]
         public async Task TestTasksPutTaskApi(int taskId, Tasks task)
         {
             var res = await this.controller.PutTasks(taskId, task);
@@ -148,11 +159,18 @@ namespace Tests
                 return;
             }
 
+            if(taskId == task.TasksID && lst == null)
+            {
+                Assert.IsInstanceOf<NotFoundResult>(res, "in case of record not found it should return NotFoundResult");
+                return;
+            }
+
             Assert.IsInstanceOf<NoContentResult>(res, "Return type must be ActionResult");
             Assert.AreEqual(task.Name, lst.Name, "Tasks propertie should match with the request parameter after successful updates");
         }
 
         [TestCaseSource("TestCaseSourceForPostTask")]
+        [Order(4)]
         public async Task TestTasksPostTaskApi(Tasks task)
         {
             var lst = (await context.Tasks.ToListAsync()).Last();
@@ -162,6 +180,27 @@ namespace Tests
             Assert.IsInstanceOf<CreatedAtActionResult>(res.Result, "Return type must be CreatedAtActionResult");
             Assert.AreEqual(task.Name, lst.Name, "Tasks propertie should match with the request parameter after successful post");
             Assert.AreEqual((((ObjectResult)res.Result).Value as Tasks).TasksID, task.TasksID, "TaskId should match after sucessfull post");
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(5)]
+        [Order(5)]
+        public async Task TestTasksDeleteApi(int taskId)
+        {
+            var lst = (await context.Tasks.ToListAsync()).Find(t => t.TasksID.Equals(taskId));
+            var res = await this.controller.DeleteTasks(taskId);
+            var lstAfterDelete = (await context.Tasks.ToListAsync()).Find(t => t.TasksID.Equals(taskId));
+            if (taskId == 5)
+            {
+                Assert.IsInstanceOf<NotFoundResult>(res.Result, "in case of record not found it should return NotFoundResult");
+                return;
+            }
+            Assert.IsInstanceOf<ActionResult<Tasks>>(res, "Return type must be ActionResult");
+            Assert.IsNotNull(res.Value, "Action result value must not be null");
+            Assert.AreEqual(lst.TasksID, res.Value.TasksID, "Tasks count should match with the count from Tasks table");
+            Assert.IsNull(lstAfterDelete, "After deletion last retreived object must be null");
         }
     }
 }
