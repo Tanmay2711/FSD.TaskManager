@@ -102,7 +102,7 @@ export class AddTaskComponent implements OnInit {
     return parentTaskName;
   }
 
-  public addOrUpdateTaskRecord = function() {
+  public addOrUpdateTaskRecord = function($event) {
 
     let taskWithId,parentTask;
     parentTask = _.find(this.taskData, (el => el.name === this.taskInfo.parentName));
@@ -131,7 +131,7 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
-  resetClicked(){
+  resetClicked($event){
     if(this.isEditView){
       this.taskInfo = Object.assign({},this.previousTaskInfo);
       this.ToolTipText = this.taskInfo.priority.toString();
