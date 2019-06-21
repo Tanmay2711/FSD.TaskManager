@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class TaskService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost:55772/api/tasks';
+  private accessPointUrl: string = 'http://localhost/TaskManagerAPI/api/tasks';
 
   constructor(private http: HttpClient) 
   { 
