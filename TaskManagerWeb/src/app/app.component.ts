@@ -7,7 +7,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'New FSD Task Manager';
+  title = 'Again one New FSD Task Manager';
   addTaskLinkText : string = "Add Task";
   onActivate(componentRef){
     this.addTaskLinkText = componentRef.isEditView ? "Edit Task" : "Add Task";
