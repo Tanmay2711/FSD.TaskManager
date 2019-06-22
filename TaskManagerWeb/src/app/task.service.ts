@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost/TaskManagerAPI/api/tasks';
+  private accessPointUrl: string = environment.accessPointUrl;
 
   constructor(private http: HttpClient) 
   { 
